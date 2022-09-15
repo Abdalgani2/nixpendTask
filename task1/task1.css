@@ -1,0 +1,114 @@
+.mainNavBar {
+    display: grid;
+    grid-template-columns: 78% auto;
+    background-color: #1A73E8;
+    height: 60px;
+    
+    align-items: center;
+}
+
+.leftDiv {
+    display: grid;
+    grid-template-columns: 20px auto;
+    padding-left: 7%;
+
+
+}
+
+.text {
+    color: #FFFFFF;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.icons {
+    color: #FFFFFF;
+    cursor: pointer;
+
+}
+
+.imgNav {
+    width: 70%;
+    height: 80px;
+}
+
+.nav {
+    display: grid;
+    grid-template-columns: 10% 10% 10% 10% 10% 10% 10%;
+}
+
+.imgLa {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 20px;
+}
+
+.paragraph {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mainDiv {
+    width: 90%;
+    display: flex;
+    grid-template-columns: 28% 28% 28%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    align-content: center;
+    column-gap: 8%;
+}
+
+.secondDiv {
+    align-items: center;
+    text-align: center;
+    width: 28%;
+    height: 20%;
+    display: grid;
+    grid-template-rows: auto auto auto;
+    row-gap: 20px;
+
+}
+
+.imgg {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width:750px) {
+    .mainDiv {
+        display: inline;
+        align-content: center;
+        margin-top: 40px;
+        row-gap: 20px;
+    }
+    .secondDiv {
+        margin-top: 20px;
+        align-items: center;
+        text-align: center;
+        width: 90%;
+        height: 20%;
+        display: grid;
+        grid-template-rows: auto auto auto;
+        row-gap: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    
+    }
+    .mainNavBar {
+        display: grid;
+        grid-template-columns: auto;
+        background-color: #1A73E8;
+        text-align: center;
+        height: auto;
+    }
+    .leftDiv {
+        display: grid;
+        grid-template-columns: 20px auto;
+        margin: auto;
+        padding: 0%;
+    
+    
+    }
+}
