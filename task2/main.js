@@ -1,5 +1,6 @@
 const body = document.querySelector("body");
 const main = document.getElementById('main');
+const searchDiv = document.getElementById('search');
 
 // SECOND NAV BAR
 const nav = document.createElement('div');
@@ -10,6 +11,7 @@ nav.innerHTML = `<nav class="w-80 p-3 navbar bg-light secondNav"  id="nav">
         <button class="btn btn-outline-success"  onclick="search()">Search</button>
       </div>
       <select name="etat" id="mySel" onChange="filter()">
+        <option value="">Select Region</option>
         <option value="Africa">Africa</option>
         <option value="Americas">Americas</option>
         <option value="Asia">Asia</option>
@@ -43,6 +45,7 @@ function displayCountries() {
         <button class="btn btn-outline-success"  onclick="search()">Search</button>
       </div>
       <select name="etat" id="mySel" onChange="filter()">
+      <option value="">Select Region</option>
         <option value="Africa">Africa</option>
         <option value="Americas">Americas</option>
         <option value="Asia">Asia</option>
@@ -137,12 +140,13 @@ function moreDetaels(data) {
 
 // SEARCH FUNCTION
 function search() {
+    
+    const countryEl = document.createElement('div');
     let name = document.getElementById("search").value
-    main.innerHTML = '';
+    searchDiv.innerHTML = '';
     fetch(`https://restcountries.com/v3.1/name/${name}`).then(res => res.json()).then(data => {
         console.log('data[0].name.common',data[0].name.common);
         main.innerHTML = '';
-        const countryEl = document.createElement('div');
         countryEl.innerHTML = `
     <div class = "detales" id="${data[0].name.common}">
          <img src="${data[0].flags.svg}" alt="${data[0].common}">
@@ -158,7 +162,7 @@ function search() {
           <button id='back'>Back </button>
 
         </div> `
-        body.append(countryEl)
+        searchDiv.append(countryEl)
          var el = document.getElementById(`back`)
         if (el) {
             el.addEventListener('click', () => {
