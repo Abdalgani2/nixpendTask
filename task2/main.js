@@ -35,6 +35,7 @@ function darkMode() {
 
 //  DISPLAY ALL COUNTRIES IN MAIN PAGE FUNCTION
 function displayCountries() {
+    main.innerHTML = '';
     nav.innerHTML = `<nav class="w-80 p-3 navbar bg-light secondNav"  id="nav">
 <div class="container-fluid">
     <div class="d-flex" role="search">
@@ -81,31 +82,54 @@ displayCountries()
 
 // MORE DETALES FUNCTION
 function moreDetaels(data) {
+    console.log("datadata",data);
     nav.innerHTML = ''
     main.innerHTML = '';
-    const movieEl = document.createElement('div');
-    movieEl.innerHTML = `
-    <div class = "detales" id="${data.name}">
-    <div>
-     <img src="${data.flags.svg}" alt="${data.name}"></div>
-        <div class="movie-info">
-            <h5>${data.name}</h5>
-            <p>population: ${data.population}</p>
-            <p>Region: ${data.region}</p>
-            <p>capital: ${data.capital}</p>
-        </div>
-        <div class="movie-info">
-            <p>${data.name}</p>
-            <p>population: ${data.population}</p>
-            <p>Region: ${data.region}</p>
-            <p>capital: ${data.capital}</p>
-        </div>
-        <button id='back'>Back <button>
-        <div> 
-        `
-    body.append(movieEl)
+    const countryEl = document.createElement('div');
+    if(data.name.common){
+        countryEl.innerHTML = `
+        <div class = "detales" id="${data.name}">
+        <div>
+         <img src="${data.flags.svg}" alt="${data.name}"></div>
+            <div class="Country-info">
+                <h5>${data.name.common}</h5>
+                <p>population: ${data.population}</p>
+                <p>Region: ${data.region}</p>
+                <p>capital: ${data.capital}</p>
+                <p>${data.name}</p>
+                <p>population: ${data.population}</p>
+                <p>Region: ${data.region}</p>
+                <p>capital: ${data.capital}</p>
+            </div>
+            <button id='back'>Back </button>
+            </div> 
+            </div>
+            `
+    }
+    else{
+        countryEl.innerHTML = `
+        <div class = "detales" id="${data.name}">
+        <div>
+         <img src="${data.flags.svg}" alt="${data.name}"></div>
+            <div class="Country-info">
+                <h5>${data.name}</h5>
+                <p>population: ${data.population}</p>
+                <p>Region: ${data.region}</p>
+                <p>capital: ${data.capital}</p>
+                <p>${data.name}</p>
+                <p>population: ${data.population}</p>
+                <p>Region: ${data.region}</p>
+                <p>capital: ${data.capital}</p>
+            </div>
+            <button id='back'>Back </button>
+            </div> 
+            </div>
+            `
+    }
+   
+    body.append(countryEl)
     document.getElementById("back").addEventListener('click', () => {
-        movieEl.innerHTML = ""
+        countryEl.innerHTML = ""
         displayCountries()
 
     })
@@ -116,38 +140,30 @@ function search() {
     let name = document.getElementById("search").value
     main.innerHTML = '';
     fetch(`https://restcountries.com/v3.1/name/${name}`).then(res => res.json()).then(data => {
-        var el = document.getElementById("search");
-
-        if (el) {
-            document.getElementById("search").remove();
-        }
-        console.log(data);
-        console.log("data", data[0].name.common);
+        console.log('data[0].name.common',data[0].name.common);
         main.innerHTML = '';
-        const movieEl = document.createElement('div');
-        movieEl.innerHTML = `
+        const countryEl = document.createElement('div');
+        countryEl.innerHTML = `
     <div class = "detales" id="${data[0].name.common}">
          <img src="${data[0].flags.svg}" alt="${data[0].common}">
-        <div class="movie-info">
-            <h2>${data[0].name.common}</h2>
-            <h5>population: ${data[0].population}</h5>
-            <h5>Region: ${data[0].region}</h5>
-            <h5>capital: ${data[0].capital}</h5>
+        <div class="Country-info">
+            <h5>${data[0].name.common}</h5>
+            <p>population: ${data[0].population}</p>
+            <p>Region: ${data[0].region}</p>
+            <p>capital: ${data[0].capital}</p>
+            <p>population: ${data[0].population}</p>
+            <p>Region: ${data[0].region}</p>
+            <p>capital: ${data[0].capital}</p>
         </div>
-        <div class="movie-info">
-            <h2>${data[0].common}</h2>
-            <h5>population: ${data[0].population}</h5>
-            <h5>Region: ${data[0].region}</h5>
-            <h5>capital: ${data[0].capital}</h5>
-        </div>
-        <div> `
-        body.append(movieEl)
-        var el = document.getElementById(`${data[0].name}`);
+          <button id='back'>Back </button>
 
+        </div> `
+        body.append(countryEl)
+         var el = document.getElementById(`back`)
         if (el) {
             el.addEventListener('click', () => {
-                console.log(Country.name)
-                moreDetaels(Country)
+                countryEl.innerHTML = ""
+                displayCountries()
             })
         }
     })
@@ -164,17 +180,17 @@ function filter() {
             const CountryEl = document.createElement('div');
             CountryEl.classList.add('Country');
             CountryEl.innerHTML = `
-                <div id="${Country.name}">
+                <div id="${Country.name.common}">
                      <img src="${Country.flags.svg}" alt="${Country.name}">
                     <div class="Country-info">
-                        <h5>${Country.name}</h5>
+                        <h5>${Country.name.common}</h5>
                         <p>population: ${Country.population}</p>
                         <p>Region: ${Country.region}</p>
                         <p>capital: ${Country.capital}</p>
                     </div>
                     <div> `
             main.append(CountryEl);
-            var el = document.getElementById(`${Country.name}`);
+            var el = document.getElementById(`${Country.name.common}`);
             console.log("el", el);
             if (el) {
                 el.addEventListener('click', () => {
